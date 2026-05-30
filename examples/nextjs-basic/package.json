@@ -1,0 +1,7 @@
+{
+  "name": "nextjs-basic-example",
+  "private": true,
+  "scripts": {
+    "dev": "node server.mjs"
+  }
+}

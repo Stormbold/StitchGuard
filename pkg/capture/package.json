@@ -1,0 +1,30 @@
+{
+  "name": "@stitchguard/capture",
+  "version": "0.1.0",
+  "description": "Playwright screenshot capture for StitchGuard",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "playwright": "^1.49.1"
+  },
+  "peerDependencies": {
+    "playwright": "^1.40.0"
+  },
+  "peerDependenciesMeta": {
+    "playwright": {
+      "optional": true
+    }
+  }
+}

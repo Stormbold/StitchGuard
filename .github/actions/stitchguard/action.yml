@@ -1,0 +1,45 @@
+name: StitchGuard Visual Check
+description: Compare target design screenshots with your app and generate agent repair reports
+branding:
+  icon: image
+  color: purple
+inputs:
+  target:
+    description: Path to target design screenshot
+    required: true
+  url:
+    description: URL to capture (use check mode)
+    required: false
+  actual:
+    description: Path to actual screenshot (use compare mode)
+    required: false
+  threshold:
+    description: Visual match threshold (0-1)
+    required: false
+    default: '0.85'
+  viewport:
+    description: Viewport size WxH
+    required: false
+    default: '390x844'
+  wait:
+    description: Wait time before screenshot in ms
+    required: false
+    default: '1000'
+  output-dir:
+    description: Output directory for artifacts
+    required: false
+    default: '.stitchguard'
+  comment-on-pr:
+    description: Post PR comment with visual report summary
+    required: false
+    default: 'true'
+outputs:
+  score:
+    description: Visual match score (0-1)
+  passed:
+    description: Whether the check passed the threshold
+  report-path:
+    description: Path to generated report.md
+runs:
+  using: node20
+  main: ../../../pkg/action/dist/index.js

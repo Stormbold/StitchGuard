@@ -1,0 +1,24 @@
+{
+  "name": "@stitchguard/report",
+  "version": "0.1.0",
+  "description": "Markdown and JSON report generation for StitchGuard",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist", "schemas"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "dev": "tsc -p tsconfig.json --watch"
+  },
+  "dependencies": {
+    "@stitchguard/core": "workspace:*",
+    "@stitchguard/agent-prompts": "workspace:*"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "@stitchguard/core",
+  "version": "0.1.0",
+  "description": "Image comparison, scoring, and visual analysis for StitchGuard",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "dev": "tsc -p tsconfig.json --watch"
+  },
+  "dependencies": {
+    "pixelmatch": "^6.0.0",
+    "pngjs": "^7.0.0",
+    "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "@types/pixelmatch": "^5.2.6",
+    "@types/pngjs": "^6.0.5"
+  }
+}

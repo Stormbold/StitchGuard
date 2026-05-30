@@ -1,0 +1,28 @@
+{
+  "name": "@stitchguard/cli",
+  "version": "0.1.0",
+  "description": "CLI for comparing design screenshots and generating agent repair prompts",
+  "type": "module",
+  "bin": {
+    "stitchguard": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run --passWithNoTests",
+    "dev": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@stitchguard/agent-prompts": "workspace:*",
+    "@stitchguard/config": "workspace:*",
+    "@stitchguard/core": "workspace:*",
+    "@stitchguard/capture": "workspace:*",
+    "@stitchguard/report": "workspace:*",
+    "commander": "^12.1.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2"
+  }
+}

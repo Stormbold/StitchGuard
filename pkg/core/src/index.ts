@@ -1,0 +1,46 @@
+export {
+  compareScreenshots,
+  loadImage,
+  rawToPngBuffer,
+  normalizeImages,
+  applyIgnoreRegions,
+  computePixelDiff,
+  createHeatmap,
+  analyzeRegions,
+  analyzeGridRegions,
+  regionDiffsToFindings,
+  getTopRegion,
+  extractDominantColors,
+  compareColors,
+  colorComparisonToFindings,
+  calculateScore,
+  calculateChangedRatio,
+  scoreToStatus,
+  formatScore,
+  formatPercent,
+  riskLevelFromScore,
+} from './compare.js';
+
+export type {
+  IgnoreRegion,
+  Viewport,
+  CompareInput,
+  VisualFinding,
+  CompareStatus,
+  CompareArtifacts,
+  CompareResult,
+  LoadedImage,
+  NormalizedPair,
+  PixelDiffResult,
+  RegionDiff,
+  DominantColor,
+  ColorComparison,
+  VisualRegion,
+  VisualFindingType,
+  VisualFindingSeverity,
+} from './types.js';
+
+export {
+  REGION_LABELS,
+  REGION_DESCRIPTIONS,
+} from './types.js';
