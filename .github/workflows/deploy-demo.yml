@@ -34,6 +34,9 @@ jobs:
       - name: Build web demo
         run: pnpm --filter @stitchguard/web-demo build
 
+      - name: Verify demo build
+        run: test -f packages/web-demo/dist/index.html
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: packages/web-demo/dist
