@@ -1,18 +1,29 @@
-import * as core from '@actions/core';
-import * as github from '@actions/github';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
+import * as core from '@actions/core';
+import * as github from '@actions/github';
 import { compareScreenshots } from '@stitchguard/core';
-import { writeReports, generateCiSummary } from '@stitchguard/report';
-import { captureUrl, closeBrowser } from '@stitchguard/capture';
+import { writeReports, generatePrComment } from '@stitchguard/report';
 import type { CompareResult } from '@stitchguard/core';
+
+async function captureUrlDynamic(
+  options: Parameters<typeof import('@stitchguard/capture')['captureUrl']>[0],
+): Promise<string> {
+  const { captureUrl } = await import('@stitchguard/capture');
+  return captureUrl(options);
+}
+
+async function closeBrowserDynamic(): Promise<void> {
+  const { closeBrowser } = await import('@stitchguard/capture');
+  await closeBrowser();
+}
 
 async function runCompareMode(
   target: string,
   actual: string,
   outputDir: string,
   threshold: number,
-): Promise<{ passed: boolean; score: number; reportPath: string }> {
+): Promise<CompareResult & { passed: boolean }> {
   const result = await compareScreenshots({
     targetPath: path.resolve(target),
     actualPath: path.resolve(actual),
@@ -23,9 +34,8 @@ async function runCompareMode(
   await writeReports(result, { agent: 'codex' });
 
   return {
+    ...result,
     passed: result.score >= threshold,
-    score: result.score,
-    reportPath: result.artifacts.reportPath,
   };
 }
 
@@ -36,12 +46,12 @@ async function runCheckMode(
   threshold: number,
   viewport: string,
   wait: number,
-): Promise<{ passed: boolean; score: number; reportPath: string }> {
+): Promise<CompareResult & { passed: boolean }> {
   const [width, height] = viewport.split('x').map(Number);
   const actualPath = path.join(outputDir, 'actual.png');
 
   try {
-    await captureUrl({
+    await captureUrlDynamic({
       url,
       outputPath: actualPath,
       viewport: { width: width!, height: height! },
@@ -59,13 +69,18 @@ async function runCheckMode(
     await writeReports(result, { agent: 'codex' });
 
     return {
+      ...result,
       passed: result.score >= threshold,
-      score: result.score,
-      reportPath: result.artifacts.reportPath,
     };
   } finally {
-    await closeBrowser();
+    await closeBrowserDynamic();
   }
+}
+
+function workflowRunUrl(): string | undefined {
+  const { serverUrl, repo, runId } = github.context;
+  if (!runId) return undefined;
+  return `${serverUrl}/${repo.owner}/${repo.repo}/actions/runs/${runId}`;
 }
 
 async function run(): Promise<void> {
@@ -77,8 +92,10 @@ async function run(): Promise<void> {
   const wait = parseInt(core.getInput('wait') || '1000', 10);
   const outputDir = core.getInput('output-dir') || '.stitchguard';
   const commentOnPr = core.getInput('comment-on-pr') !== 'false';
+  const failOnThreshold = core.getInput('fail-on-threshold') !== 'false';
+  const attachPrompt = core.getInput('attach-prompt') === 'true';
 
-  let outcome: { passed: boolean; score: number; reportPath: string };
+  let outcome: CompareResult & { passed: boolean };
 
   if (url) {
     outcome = await runCheckMode(target, url, outputDir, threshold, viewport, wait);
@@ -91,16 +108,35 @@ async function run(): Promise<void> {
 
   core.setOutput('score', String(outcome.score));
   core.setOutput('passed', String(outcome.passed));
-  core.setOutput('report-path', outcome.reportPath);
+  core.setOutput('report-path', outcome.artifacts.reportPath);
+  core.setOutput('output-dir', outputDir);
+
+  const runUrl = workflowRunUrl();
+  if (runUrl) {
+    core.setOutput('artifact-url', runUrl);
+  }
 
   if (commentOnPr && github.context.payload.pull_request) {
     const token = process.env.GITHUB_TOKEN;
     if (token) {
-      const jsonPath = path.join(outputDir, 'result.json');
       try {
-        const content = await readFile(jsonPath, 'utf8');
-        const result = JSON.parse(content) as CompareResult;
-        const summary = generateCiSummary(result);
+        let promptContent: string | undefined;
+        if (attachPrompt) {
+          try {
+            promptContent = await readFile(
+              path.join(outputDir, 'codex-fix-prompt.md'),
+              'utf8',
+            );
+          } catch {
+            // optional
+          }
+        }
+
+        const summary = generatePrComment(outcome, {
+          artifactUrl: runUrl,
+          attachPrompt,
+          promptContent,
+        });
 
         const octokit = github.getOctokit(token);
         await octokit.rest.issues.createComment({
@@ -117,7 +153,7 @@ async function run(): Promise<void> {
     }
   }
 
-  if (!outcome.passed) {
+  if (failOnThreshold && !outcome.passed) {
     core.setFailed(
       `Visual match ${(outcome.score * 100).toFixed(1)}% is below threshold ${(threshold * 100).toFixed(1)}%`,
     );

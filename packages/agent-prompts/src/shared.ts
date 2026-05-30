@@ -161,7 +161,7 @@ export function generateAgentPrompt(
   if (options.tailwindHints?.length) {
     sections.push(
       '',
-      '## Likely Tailwind adjustments',
+      '## Possible Tailwind adjustments to inspect',
       '',
       ...options.tailwindHints.map((hint) => `- ${hint}`),
     );

@@ -1,0 +1,55 @@
+{
+  "version": "0.1.0",
+  "target": "I:\\StitchGuard\\examples\\google-stitch-to-codex\\target.png",
+  "actual": "I:\\StitchGuard\\examples\\google-stitch-to-codex\\actual.png",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "score": 0.9287762790132459,
+  "changedPixels": 23444,
+  "changedRatio": 0.07122372098675417,
+  "totalPixels": 329160,
+  "status": "excellent",
+  "dimensions": {
+    "width": 390,
+    "height": 844
+  },
+  "findings": [
+    {
+      "type": "layout",
+      "severity": "high",
+      "region": "header",
+      "message": "The header area differs from the target.",
+      "confidence": 0.95
+    },
+    {
+      "type": "layout",
+      "severity": "high",
+      "region": "upper-content",
+      "message": "The largest visual difference appears in the upper-content region. This often indicates mismatched hero spacing, card size, or header alignment.",
+      "confidence": 0.95
+    },
+    {
+      "type": "layout",
+      "severity": "high",
+      "region": "middle-content",
+      "message": "The middle content area differs significantly from the target.",
+      "confidence": 0.95
+    },
+    {
+      "type": "layout",
+      "severity": "high",
+      "region": "lower-content",
+      "message": "The lower content area differs significantly from the target.",
+      "confidence": 0.95
+    },
+    {
+      "type": "layout",
+      "severity": "high",
+      "region": "bottom",
+      "message": "The bottom area has visible spacing differences. This may indicate changed bottom navigation height, padding, or safe-area handling.",
+      "confidence": 0.95
+    }
+  ]
+}

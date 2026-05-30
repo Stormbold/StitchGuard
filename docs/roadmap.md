@@ -1,33 +1,39 @@
 # Roadmap
 
-## v0.1 — MVP
+## Phase 1 — Demo & positioning ✅
 
-- CLI `compare` command
-- Pixel diff, heatmap, score
-- Markdown + JSON reports
-- Codex/Cursor/Claude repair prompts
+- [why-stitchguard.md](why-stitchguard.md) — positioning vs pixel diff tools
+- [examples/](../examples/) gallery with pre-generated artifacts
+- README before/after story
 
-## v0.2 — Web capture
+## Phase 2 — GitHub Action v1 ✅
 
-- Playwright URL capture (`check --url`)
-- Viewport and device presets
-- Config file, ignore regions
+- Root `action/` with ncc bundle — `uses: Stormbold/StitchGuard/action@v1`
+- Rich PR comments via `generatePrComment()`
+- Artifact upload + extended inputs
+- [release-action.yml](../.github/workflows/release-action.yml)
 
-## v0.3 — Agent workflows
+## Phase 3 — MCP Server ✅
 
-- `--agent` flags, `agent-prompt` command
-- Prompt modes: conservative, strict, refactor-safe
+- `packages/mcp-server` — 5 tools for agent loops
+- [mcp-setup.md](mcp-setup.md)
 
-## v0.4 — Framework hints
+## Phase 4 — Examples Gallery + Bad UI Zoo ✅
 
-- Tailwind class suggestions
-- shadcn/ui pattern hints
-- Stack detection from package.json
+- [examples/README.md](../examples/README.md) index
+- `bad-ui-zoo/` Vitest regression fixtures
 
-## v0.5 — GitHub Action
+## Phase 5 — Tailwind hints v2 + init-agent ✅
 
-- Composite action, PR comments, CI threshold gate
+- Inspect-oriented Tailwind hints (no exact DOM claims)
+- `stitchguard init-agent` → `.stitchguard/` agent rules
+
+## Phase 6 — Web Demo ✅
+
+- Client-side compare demo with embedded samples
 
 ## Later
 
-- Flutter capture, Figma plugin, HTML report
+- VS Code extension, Storybook addon
+- Flutter capture, Figma plugin
+- Separate `stitchguard-action` repo if traction warrants

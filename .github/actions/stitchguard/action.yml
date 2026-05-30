@@ -1,8 +1,5 @@
 name: StitchGuard Visual Check
-description: Compare target design screenshots with your app and generate agent repair reports
-branding:
-  icon: image
-  color: purple
+description: Delegates to the publishable action bundle at repo root
 inputs:
   target:
     description: Path to target design screenshot
@@ -33,13 +30,41 @@ inputs:
     description: Post PR comment with visual report summary
     required: false
     default: 'true'
-outputs:
-  score:
-    description: Visual match score (0-1)
-  passed:
-    description: Whether the check passed the threshold
-  report-path:
-    description: Path to generated report.md
+  upload-artifacts:
+    description: Upload diff, heatmap, report, and prompt as workflow artifacts
+    required: false
+    default: 'true'
+  fail-on-threshold:
+    description: Fail the job when visual match is below threshold
+    required: false
+    default: 'true'
+  attach-prompt:
+    description: Include codex-fix-prompt.md as collapsible section in PR comment
+    required: false
+    default: 'false'
+  install-playwright:
+    description: Install Playwright Chromium when url is set
+    required: false
+    default: 'true'
+  artifact-name:
+    description: Name for uploaded workflow artifacts
+    required: false
+    default: 'stitchguard-report'
 runs:
-  using: node20
-  main: ../../../packages/action/dist/index.js
+  using: composite
+  steps:
+    - uses: ../../../action
+      with:
+        target: ${{ inputs.target }}
+        url: ${{ inputs.url }}
+        actual: ${{ inputs.actual }}
+        threshold: ${{ inputs.threshold }}
+        viewport: ${{ inputs.viewport }}
+        wait: ${{ inputs.wait }}
+        output-dir: ${{ inputs.output-dir }}
+        comment-on-pr: ${{ inputs.comment-on-pr }}
+        upload-artifacts: ${{ inputs.upload-artifacts }}
+        fail-on-threshold: ${{ inputs.fail-on-threshold }}
+        attach-prompt: ${{ inputs.attach-prompt }}
+        install-playwright: ${{ inputs.install-playwright }}
+        artifact-name: ${{ inputs.artifact-name }}

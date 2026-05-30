@@ -8,6 +8,21 @@ export default tseslint.config(
     ignores: ['**/dist/**', '**/node_modules/**', '**/.stitchguard/**', 'scripts/**'],
   },
   {
+    files: ['packages/web-demo/**/*.js'],
+    languageOptions: {
+      globals: {
+        document: 'readonly',
+        window: 'readonly',
+        fetch: 'readonly',
+        Blob: 'readonly',
+        URL: 'readonly',
+        Image: 'readonly',
+        ImageData: 'readonly',
+        createImageBitmap: 'readonly',
+      },
+    },
+  },
+  {
     languageOptions: {
       globals: {
         console: 'readonly',

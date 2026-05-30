@@ -1,0 +1,8 @@
+{
+  "name": "stitchguard-action",
+  "private": true,
+  "description": "Self-contained GitHub Action bundle for StitchGuard",
+  "scripts": {
+    "build": "node ../scripts/bundle-action.mjs"
+  }
+}

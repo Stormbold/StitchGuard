@@ -43,24 +43,28 @@ export function generateTailwindHints(input: TailwindHintInput): string[] {
 
   for (const finding of input.findings) {
     if (finding.region === 'upper-content') {
-      hints.push('Compare card padding — consider increasing `px-4` to `px-6`.');
       hints.push(
-        `Compare border radius — target may be closer to \`${nearestRadiusClass(24)}\` than \`${nearestRadiusClass(16)}\`.`,
+        'Inspect card horizontal padding — compare `px-4` vs `px-6` on the main card container.',
+      );
+      hints.push(
+        `Inspect border radius — target may be closer to \`${nearestRadiusClass(24)}\` than \`${nearestRadiusClass(16)}\`.`,
       );
     }
     if (finding.region === 'bottom') {
-      hints.push('Review bottom navigation padding and safe-area classes such as `pb-safe`.');
+      hints.push(
+        'Inspect bottom navigation padding and safe-area utilities such as `pb-safe` or `env(safe-area-inset-bottom)`.',
+      );
     }
   }
 
   if (input.targetAccent && input.actualAccent && input.targetAccent !== input.actualAccent) {
     hints.push(
-      `Replace accent color toward \`bg-[${input.targetAccent}]\` instead of \`bg-[${input.actualAccent}]\`.`,
+      `Inspect primary/accent color tokens — target is near \`${input.targetAccent}\`, actual is near \`${input.actualAccent}\`.`,
     );
   }
 
   if (findingMentionsTypography(input.findings)) {
-    hints.push('Compare typography scale — `text-lg` vs `text-xl` may need adjustment.');
+    hints.push('Inspect typography scale — compare `text-lg` vs `text-xl` on headings.');
   }
 
   return [...new Set(hints)];
@@ -98,12 +102,12 @@ export function generateShadcnHints(findings: VisualFinding[]): string[] {
   const hints: string[] = [];
 
   if (findings.some((f) => f.region === 'upper-content')) {
-    hints.push('Check Card component radius and padding defaults in shadcn/ui.');
-    hints.push('Verify Button variant/size props match the target design.');
+    hints.push('Inspect shadcn Card component default radius and padding props.');
+    hints.push('Inspect Button variant/size props against the target design.');
   }
 
   if (findings.some((f) => f.type === 'color')) {
-    hints.push('Review CSS variables in globals.css for primary/accent token alignment.');
+    hints.push('Inspect CSS variables in globals.css for primary/accent token alignment.');
   }
 
   return hints;

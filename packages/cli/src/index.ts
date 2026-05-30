@@ -5,6 +5,7 @@ import { runCheck } from './commands/check.js';
 import { runInit } from './commands/init.js';
 import { runReport } from './commands/report.js';
 import { runAgentPrompt } from './commands/agent-prompt.js';
+import { runInitAgent } from './commands/init-agent.js';
 
 const program = new Command();
 
@@ -120,6 +121,23 @@ program
         agent: options.agent,
         mode: options.mode,
         output: options.output,
+      });
+    } catch (error) {
+      console.error(error instanceof Error ? error.message : error);
+      process.exitCode = 1;
+    }
+  });
+
+program
+  .command('init-agent')
+  .description('Create .stitchguard/ agent rules and prompt templates in the target project')
+  .option('--write-agents-md', 'Also write root AGENTS.md (opt-in)')
+  .option('-o, --output-dir <dir>', 'StitchGuard directory', '.stitchguard')
+  .action(async (options) => {
+    try {
+      await runInitAgent({
+        writeAgentsMd: options.writeAgentsMd,
+        outputDir: options.outputDir,
       });
     } catch (error) {
       console.error(error instanceof Error ? error.message : error);

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { generateMarkdownReport, serializeJsonReport } from '../src/index.js';
+import { generateMarkdownReport, serializeJsonReport, generatePrComment } from '../src/index.js';
 import type { CompareResult } from '@stitchguard/core';
 
 const mockResult: CompareResult = {
@@ -48,5 +48,15 @@ describe('report generation', () => {
     expect(parsed.version).toBe('0.1.0');
     expect(parsed.score).toBe(0.824);
     expect(parsed.findings).toHaveLength(1);
+  });
+
+  it('generates rich PR comment with artifacts', () => {
+    const comment = generatePrComment(mockResult, {
+      artifactUrl: 'https://github.com/example/actions/runs/1',
+    });
+    expect(comment).toContain('## StitchGuard Visual Report');
+    expect(comment).toContain('Generated artifacts');
+    expect(comment).toContain('diff.png');
+    expect(comment).toContain('Download workflow artifacts');
   });
 });

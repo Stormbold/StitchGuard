@@ -1,0 +1,55 @@
+{
+  "version": "0.1.0",
+  "target": "I:\\StitchGuard\\examples\\broken-tailwind-card\\target.png",
+  "actual": "I:\\StitchGuard\\examples\\broken-tailwind-card\\actual.png",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "score": 0.9901810669583181,
+  "changedPixels": 3232,
+  "changedRatio": 0.009818933041681856,
+  "totalPixels": 329160,
+  "status": "excellent",
+  "dimensions": {
+    "width": 390,
+    "height": 844
+  },
+  "findings": [
+    {
+      "type": "layout",
+      "severity": "high",
+      "region": "header",
+      "message": "The header area differs from the target.",
+      "confidence": 0.95
+    },
+    {
+      "type": "layout",
+      "severity": "high",
+      "region": "upper-content",
+      "message": "The largest visual difference appears in the upper-content region. This often indicates mismatched hero spacing, card size, or header alignment.",
+      "confidence": 0.95
+    },
+    {
+      "type": "layout",
+      "severity": "high",
+      "region": "middle-content",
+      "message": "The middle content area differs significantly from the target.",
+      "confidence": 0.95
+    },
+    {
+      "type": "layout",
+      "severity": "high",
+      "region": "lower-content",
+      "message": "The lower content area differs significantly from the target.",
+      "confidence": 0.95
+    },
+    {
+      "type": "layout",
+      "severity": "high",
+      "region": "bottom",
+      "message": "The bottom area has visible spacing differences. This may indicate changed bottom navigation height, padding, or safe-area handling.",
+      "confidence": 0.95
+    }
+  ]
+}

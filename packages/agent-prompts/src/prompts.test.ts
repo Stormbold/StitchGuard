@@ -76,7 +76,8 @@ describe('agent prompts', () => {
       targetAccent: '#CF98AF',
       actualAccent: '#D184A1',
     });
-    expect(hints.some((h) => h.includes('rounded'))).toBe(true);
-    expect(hints.some((h) => h.includes('#CF98AF'))).toBe(true);
+    expect(hints.some((h) => h.includes('Inspect border radius'))).toBe(true);
+    expect(hints.some((h) => h.includes('Inspect primary/accent'))).toBe(true);
+    expect(hints.every((h) => !h.includes('Change exactly'))).toBe(true);
   });
 });

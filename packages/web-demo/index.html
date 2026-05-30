@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StitchGuard Demo</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header>
+        <h1>StitchGuard</h1>
+        <p>Client-side visual compare — no upload, runs in your browser.</p>
+      </header>
+
+      <section class="controls">
+        <button id="try-sample" type="button">Try sample (Google Stitch → Codex)</button>
+        <label class="file-label">
+          Target PNG
+          <input id="target-file" type="file" accept="image/png" />
+        </label>
+        <label class="file-label">
+          Actual PNG
+          <input id="actual-file" type="file" accept="image/png" />
+        </label>
+        <button id="compare-btn" type="button" disabled>Compare</button>
+      </section>
+
+      <section id="results" class="results hidden">
+        <div class="score-card">
+          <span class="score-label">Visual Match</span>
+          <span id="score-value" class="score-value">—</span>
+        </div>
+        <div class="images">
+          <figure>
+            <figcaption>Target</figcaption>
+            <canvas id="target-canvas"></canvas>
+          </figure>
+          <figure>
+            <figcaption>Actual</figcaption>
+            <canvas id="actual-canvas"></canvas>
+          </figure>
+          <figure>
+            <figcaption>Diff</figcaption>
+            <canvas id="diff-canvas"></canvas>
+          </figure>
+        </div>
+        <ul id="findings-list"></ul>
+      </section>
+    </main>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

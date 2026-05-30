@@ -12,6 +12,11 @@
     "dev": "pnpm --filter @stitchguard/cli dev",
     "stitchguard": "node packages/cli/dist/index.js",
     "generate-screenshots": "tsx scripts/generate-screenshots.ts",
+    "generate-examples": "pnpm build && tsx scripts/generate-example-gallery.ts",
+    "generate-zoo": "pnpm build && tsx scripts/generate-bad-ui-zoo.ts",
+    "generate-all": "pnpm generate-examples && pnpm generate-zoo",
+    "build:action": "pnpm build && node scripts/bundle-action.mjs",
+    "demo:web": "pnpm --filter @stitchguard/web-demo dev",
     "setup:browser": "playwright install chromium"
   },
   "keywords": ["visual-testing", "pixel-diff", "ai-agents", "codex", "cursor"],
@@ -31,6 +36,7 @@
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.18.1",
-    "vitest": "^2.1.8"
+    "vitest": "^2.1.8",
+    "esbuild": "^0.25.0"
   }
 }

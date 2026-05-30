@@ -67,14 +67,56 @@ function capitalize(value: string): string {
 }
 
 export function generateCiSummary(result: CompareResult): string {
+  return generatePrComment(result);
+}
+
+export type PrCommentOptions = {
+  artifactUrl?: string;
+  attachPrompt?: boolean;
+  promptContent?: string;
+};
+
+export function generatePrComment(
+  result: CompareResult,
+  options: PrCommentOptions = {},
+): string {
   const mainDifferences = result.findings.slice(0, 5).map((finding) => `- ${finding.message}`);
 
-  return `## StitchGuard Visual Report
+  const artifactLines = [
+    '- diff.png',
+    '- heatmap.png',
+    '- report.md',
+    '- result.json',
+    '- codex-fix-prompt.md',
+  ];
 
-Visual Match: ${formatScore(result.score)}
+  if (options.artifactUrl) {
+    artifactLines.push(`- [Download workflow artifacts](${options.artifactUrl})`);
+  }
 
-Main differences:
-${mainDifferences.length > 0 ? mainDifferences.join('\n') : '- No major differences detected.'}
+  const sections = [
+    '## StitchGuard Visual Report',
+    '',
+    `Visual Match: ${formatScore(result.score)}`,
+    '',
+    'Main differences:',
+    mainDifferences.length > 0 ? mainDifferences.join('\n') : '- No major differences detected.',
+    '',
+    'Generated artifacts:',
+    artifactLines.join('\n'),
+  ];
 
-Generated fix prompt attached.`;
+  if (options.attachPrompt && options.promptContent) {
+    sections.push(
+      '',
+      '<details>',
+      '<summary>Codex fix prompt</summary>',
+      '',
+      options.promptContent,
+      '',
+      '</details>',
+    );
+  }
+
+  return sections.join('\n');
 }

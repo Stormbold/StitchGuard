@@ -61,5 +61,6 @@ export async function writeCiSummary(
   return summary;
 }
 
-export { generateMarkdownReport, generateCiSummary } from './markdown.js';
+export { generateMarkdownReport, generateCiSummary, generatePrComment } from './markdown.js';
+export type { PrCommentOptions } from './markdown.js';
 export { generateJsonReport, serializeJsonReport } from './json.js';

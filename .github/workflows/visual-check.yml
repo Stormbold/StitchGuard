@@ -10,6 +10,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
+      actions: write
     steps:
       - uses: actions/checkout@v4
 
@@ -26,19 +27,13 @@ jobs:
 
       - run: pnpm generate-screenshots
 
-      - run: pnpm build
+      - run: pnpm build:action
 
       - name: Run StitchGuard compare
-        uses: ./.github/actions/stitchguard
+        uses: ./action
         with:
           target: examples/screenshots/target.png
           actual: examples/screenshots/actual.png
           threshold: '0.70'
           comment-on-pr: 'true'
-
-      - name: Upload visual report
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: stitchguard-report
-          path: .stitchguard/
+          upload-artifacts: 'true'
