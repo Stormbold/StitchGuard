@@ -15,7 +15,7 @@ StitchGuard compares your target design screenshot with your implemented UI and 
 
 ![StitchGuard visual diff preview](docs/assets/stitchguard-demo-preview.png)
 
-Open the [live demo](https://stormbold.github.io/StitchGuard/) → **Try Google Stitch → Codex sample** → Compare → copy `codex-fix-prompt.md`.  
+Open the [live demo](https://stormbold.github.io/StitchGuard/) → **Try Google Stitch → Codex sample** → Compare → situation-specific **Codex Fix Prompt** (copy or download).  
 Animated GIF: tracked in [good first issues](docs/good-first-issues.md).
 
 ## Why StitchGuard?

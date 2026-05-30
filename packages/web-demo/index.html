@@ -15,7 +15,7 @@
           StitchGuard shows what changed — and writes the repair prompt for Codex, Cursor, and Claude Code.
         </p>
         <p class="flow">
-          Target Design → AI Implementation → Visual Diff → Codex Fix Prompt
+          Target Design → AI Implementation → Visual Diff → <strong>Codex Fix Prompt</strong>
         </p>
         <p class="privacy">
           <strong>Privacy:</strong> Images never leave your device. Compare runs locally in your browser.
@@ -65,14 +65,18 @@
 
         <section class="prompt-panel card">
           <div class="prompt-header">
-            <h2>Repair prompt</h2>
+            <div>
+              <h2>Codex Fix Prompt</h2>
+              <p class="prompt-sub">Generated from your diff — region findings, color hints, and fix directions.</p>
+            </div>
             <div class="prompt-actions">
               <button id="copy-prompt-btn" type="button" class="btn-secondary">Copy codex-fix-prompt.md</button>
+              <button id="download-prompt-btn" type="button" class="btn-secondary">Download codex-fix-prompt.md</button>
               <button id="download-report-btn" type="button" class="btn-secondary">Download report.md</button>
               <button id="download-diff-btn" type="button" class="btn-secondary">Download diff.png</button>
             </div>
           </div>
-          <pre id="prompt-preview" class="prompt-preview"></pre>
+          <pre id="prompt-preview" class="prompt-preview" aria-label="Generated Codex fix prompt"></pre>
         </section>
       </section>
 
