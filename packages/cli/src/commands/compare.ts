@@ -73,7 +73,6 @@ export async function runCompare(
       stack: config.agent?.stack ?? 'generic',
       tailwindHints,
     },
-    writeProjectAgentsMd: Boolean(options.agent),
     promptsDir: options.agent ? path.join(outputDir, 'prompts') : undefined,
   });
 

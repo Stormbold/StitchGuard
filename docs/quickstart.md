@@ -22,6 +22,12 @@ Artifacts are written to `.stitchguard/` by default.
 
 ## Compare against a running app
 
+First-time setup for URL capture:
+
+```bash
+pnpm setup:browser
+```
+
 Start your dev server, then:
 
 ```bash

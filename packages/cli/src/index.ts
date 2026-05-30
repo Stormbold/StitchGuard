@@ -114,14 +114,12 @@ program
   .option('--agent <agent>', 'Agent target (codex, cursor, claude)')
   .option('--mode <mode>', 'Prompt mode (conservative, strict, refactor-safe)')
   .option('-o, --output <path>', 'Output path for prompt file')
-  .option('--write-agents-md', 'Also generate AGENTS.md for the target project')
   .action(async (options) => {
     try {
       await runAgentPrompt(options.report, {
         agent: options.agent,
         mode: options.mode,
         output: options.output,
-        writeAgentsMd: options.writeAgentsMd,
       });
     } catch (error) {
       console.error(error instanceof Error ? error.message : error);

@@ -2,7 +2,6 @@ import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import {
   generateAgentPrompt,
-  generateProjectAgentsMd,
   getAgentPromptFilename,
   type AgentTarget,
   type PromptMode,
@@ -14,7 +13,6 @@ export type AgentPromptOptions = {
   agent?: AgentTarget;
   mode?: PromptMode;
   output?: string;
-  writeAgentsMd?: boolean;
 };
 
 export async function runAgentPrompt(
@@ -36,10 +34,4 @@ export async function runAgentPrompt(
 
   await writeFile(outputPath, prompt);
   console.log(`Generated ${outputPath}`);
-
-  if (options.writeAgentsMd) {
-    const agentsPath = path.join(path.dirname(resolved), 'AGENTS.md');
-    await writeFile(agentsPath, generateProjectAgentsMd(result));
-    console.log(`Generated ${agentsPath}`);
-  }
 }

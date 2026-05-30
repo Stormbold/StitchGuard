@@ -1,6 +1,5 @@
 export {
   generateAgentPrompt,
-  generateProjectAgentsMd,
   getAgentPromptFilename,
   getRulesForMode,
   formatFindingsList,

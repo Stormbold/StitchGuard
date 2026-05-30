@@ -1,11 +1,12 @@
 node_modules/
 dist/
-packages/
-*.tsbuildinfo
 .stitchguard/
+.stitchguard-*/
 coverage/
 .DS_Store
 *.log
 .env
 .env.*
 !.env.example
+*.tsbuildinfo
+stitchguard.config.ts

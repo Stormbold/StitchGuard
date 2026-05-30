@@ -1,6 +1,7 @@
 {
   "name": "stitchguard",
   "private": true,
+  "type": "module",
   "version": "0.1.0",
   "description": "Compare target design screenshots with implemented UI and generate agent repair prompts",
   "scripts": {
@@ -9,8 +10,9 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "dev": "pnpm --filter @stitchguard/cli dev",
-    "stitchguard": "node pkg/cli/dist/index.js",
-    "generate-screenshots": "tsx scripts/generate-screenshots.ts"
+    "stitchguard": "node packages/cli/dist/index.js",
+    "generate-screenshots": "tsx scripts/generate-screenshots.ts",
+    "setup:browser": "playwright install chromium"
   },
   "keywords": ["visual-testing", "pixel-diff", "ai-agents", "codex", "cursor"],
   "license": "MIT",

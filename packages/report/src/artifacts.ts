@@ -3,7 +3,6 @@ import path from 'node:path';
 import type { CompareResult } from '@stitchguard/core';
 import {
   generateAgentPrompt,
-  generateProjectAgentsMd,
   getAgentPromptFilename,
   type AgentTarget,
   type GeneratePromptOptions,
@@ -14,7 +13,6 @@ import { serializeJsonReport } from './json.js';
 export type WriteReportsOptions = {
   agent?: AgentTarget;
   promptOptions?: GeneratePromptOptions;
-  writeProjectAgentsMd?: boolean;
   promptsDir?: string;
 };
 
@@ -41,11 +39,6 @@ export async function writeReports(
   await writeFile(agentPromptPath, agentPrompt);
 
   result.artifacts.agentPromptPath = agentPromptPath;
-
-  if (options.writeProjectAgentsMd) {
-    const agentsPath = path.join(outputDir, 'AGENTS.md');
-    await writeFile(agentsPath, generateProjectAgentsMd(result));
-  }
 
   if (options.promptsDir) {
     await mkdir(options.promptsDir, { recursive: true });

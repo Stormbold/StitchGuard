@@ -1,9 +1,5 @@
 import { createServer } from 'node:http';
-import { readFile } from 'node:fs/promises';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const port = 3000;
 
 const html = `<!DOCTYPE html>

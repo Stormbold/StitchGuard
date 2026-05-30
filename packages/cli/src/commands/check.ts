@@ -99,7 +99,6 @@ export async function runCheck(
         stack: config.agent?.stack ?? 'generic',
         tailwindHints,
       },
-      writeProjectAgentsMd: Boolean(options.agent),
       promptsDir: options.agent ? path.join(outputDir, 'prompts') : undefined,
     });
 

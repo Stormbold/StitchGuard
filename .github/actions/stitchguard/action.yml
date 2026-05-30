@@ -42,4 +42,4 @@ outputs:
     description: Path to generated report.md
 runs:
   using: node20
-  main: ../../../pkg/action/dist/index.js
+  main: ../../../packages/action/dist/index.js

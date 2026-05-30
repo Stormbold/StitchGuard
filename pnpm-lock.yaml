@@ -36,7 +36,7 @@ importers:
         specifier: ^2.1.8
         version: 2.1.9(@types/node@22.19.19)
 
-  pkg/action:
+  packages/action:
     dependencies:
       '@actions/core':
         specifier: ^1.1.10
@@ -54,19 +54,19 @@ importers:
         specifier: workspace:*
         version: link:../report
 
-  pkg/agent-prompts:
+  packages/agent-prompts:
     dependencies:
       '@stitchguard/core':
         specifier: workspace:*
         version: link:../core
 
-  pkg/capture:
+  packages/capture:
     dependencies:
       playwright:
         specifier: ^1.49.1
         version: 1.60.0
 
-  pkg/cli:
+  packages/cli:
     dependencies:
       '@stitchguard/agent-prompts':
         specifier: workspace:*
@@ -91,13 +91,13 @@ importers:
         specifier: ^4.19.2
         version: 4.22.3
 
-  pkg/config:
+  packages/config:
     dependencies:
       '@stitchguard/core':
         specifier: workspace:*
         version: link:../core
 
-  pkg/core:
+  packages/core:
     dependencies:
       pixelmatch:
         specifier: ^6.0.0
@@ -116,7 +116,7 @@ importers:
         specifier: ^6.0.5
         version: 6.0.5
 
-  pkg/report:
+  packages/report:
     dependencies:
       '@stitchguard/agent-prompts':
         specifier: workspace:*
