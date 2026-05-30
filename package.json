@@ -17,6 +17,7 @@
     "generate-all": "pnpm generate-examples && pnpm generate-zoo",
     "build:action": "pnpm build && node scripts/bundle-action.mjs",
     "demo:web": "pnpm --filter @stitchguard/web-demo dev",
+    "build:demo": "pnpm --filter @stitchguard/web-demo build",
     "setup:browser": "playwright install chromium"
   },
   "keywords": ["visual-testing", "pixel-diff", "ai-agents", "codex", "cursor"],

@@ -5,6 +5,8 @@ But they often ignore the design.
 
 StitchGuard compares your target design screenshot with your implemented UI and generates a precise repair report for Codex, Cursor, Claude Code, and other AI coding agents.
 
+**Live demo:** [stormbold.github.io/StitchGuard](https://stormbold.github.io/StitchGuard/) — try the sample in your browser, no install.
+
 > **Disclaimer:** StitchGuard is not affiliated with Google, OpenAI, Anthropic, Cursor, or any design-to-code platform.
 
 ## Why StitchGuard?
@@ -60,8 +62,11 @@ Open `.stitchguard/report.md` and `.stitchguard/codex-fix-prompt.md`.
 
 ### 4. Web demo (browser-only)
 
+**Online:** [https://stormbold.github.io/StitchGuard/](https://stormbold.github.io/StitchGuard/)
+
+**Local:**
 ```bash
-pnpm --filter @stitchguard/web-demo dev
+pnpm demo:web
 ```
 
 Click **Try sample** — no server upload, runs client-side.

@@ -45,9 +45,10 @@ function drawBufferToCanvas(canvas, buffer) {
 }
 
 async function loadSample() {
+  const base = import.meta.env.BASE_URL;
   const [targetRes, actualRes] = await Promise.all([
-    fetch('/samples/target.png'),
-    fetch('/samples/actual.png'),
+    fetch(`${base}samples/target.png`),
+    fetch(`${base}samples/actual.png`),
   ]);
   targetBuffer = new Uint8Array(await targetRes.arrayBuffer());
   actualBuffer = new Uint8Array(await actualRes.arrayBuffer());
