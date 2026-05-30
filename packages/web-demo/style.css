@@ -7,6 +7,7 @@ body {
   font-family: system-ui, -apple-system, sans-serif;
   background: #f8f6fa;
   color: #1e1e23;
+  line-height: 1.5;
 }
 
 .page {
@@ -15,21 +16,64 @@ body {
   padding: 2rem 1.5rem 4rem;
 }
 
-header h1 {
-  margin: 0 0 0.25rem;
-  font-size: 1.75rem;
+.hero {
+  margin-bottom: 1.75rem;
 }
 
-header p {
-  margin: 0 0 1.5rem;
+.eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #9a6b82;
+}
+
+.hero h1 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  line-height: 1.15;
+}
+
+.lead {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  color: #333;
+  max-width: 42rem;
+}
+
+.flow {
+  margin: 0 0 1rem;
+  padding: 0.65rem 0.85rem;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #ece8ef;
+  font-size: 0.9rem;
   color: #555;
+}
+
+.privacy {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #444;
+  padding: 0.75rem 1rem;
+  background: #eef9f0;
+  border: 1px solid #c8e6cc;
+  border-radius: 8px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  border: 1px solid #ece8ef;
 }
 
 .controls {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  align-items: center;
+  align-items: flex-end;
   margin-bottom: 1.5rem;
 }
 
@@ -39,12 +83,21 @@ button,
 }
 
 button {
-  background: #cf98af;
-  color: #fff;
   border: none;
   border-radius: 8px;
-  padding: 0.6rem 1rem;
+  padding: 0.65rem 1rem;
   cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: #cf98af;
+  color: #fff;
+}
+
+.btn-secondary {
+  background: #f0e8ed;
+  color: #3a2a32;
 }
 
 button:disabled {
@@ -65,30 +118,60 @@ button:disabled {
 }
 
 .score-card {
-  background: #fff;
+  background: linear-gradient(135deg, #fff 0%, #faf6f8 100%);
   border-radius: 12px;
-  padding: 1rem 1.25rem;
+  padding: 1.25rem 1.5rem;
   margin-bottom: 1rem;
   display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 1px solid #ece8ef;
 }
 
 .score-label {
-  font-size: 0.9rem;
+  display: block;
+  font-size: 0.85rem;
   color: #666;
+  margin-bottom: 0.15rem;
 }
 
 .score-value {
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 800;
   color: #cf98af;
+  line-height: 1;
+}
+
+.score-badge {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: #f0e8ed;
+  color: #5c3d4d;
+}
+
+.score-badge.good {
+  background: #e6f4ea;
+  color: #1e6b3a;
+}
+
+.score-badge.warn {
+  background: #fff4e5;
+  color: #9a5b00;
+}
+
+.score-badge.bad {
+  background: #fdecea;
+  color: #b42318;
 }
 
 .images {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 figure {
@@ -96,12 +179,14 @@ figure {
   background: #fff;
   border-radius: 12px;
   padding: 0.75rem;
+  border: 1px solid #ece8ef;
 }
 
 figcaption {
   font-size: 0.8rem;
   color: #888;
   margin-bottom: 0.5rem;
+  font-weight: 600;
 }
 
 canvas {
@@ -111,8 +196,65 @@ canvas {
   background: #eee;
 }
 
-#findings-list {
-  margin-top: 1rem;
+.findings {
+  margin: 0 0 1rem;
   padding-left: 1.25rem;
-  line-height: 1.6;
+}
+
+.prompt-panel {
+  margin-top: 0.5rem;
+}
+
+.prompt-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.prompt-header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.prompt-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.prompt-preview {
+  margin: 0;
+  padding: 1rem;
+  background: #fafafa;
+  border: 1px solid #ece8ef;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 280px;
+  overflow: auto;
+}
+
+.footer {
+  margin-top: 2.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.footer a {
+  color: #9a6b82;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer span {
+  margin: 0 0.35rem;
 }

@@ -5,9 +5,18 @@ But they often ignore the design.
 
 StitchGuard compares your target design screenshot with your implemented UI and generates a precise repair report for Codex, Cursor, Claude Code, and other AI coding agents.
 
-**Live demo:** [stormbold.github.io/StitchGuard](https://stormbold.github.io/StitchGuard/) — try the sample in your browser, no install.
+**StitchGuard does not just show a pixel diff — it turns visual mismatch into a repair prompt your coding agent can act on.**
+
+**Live demo:** [stormbold.github.io/StitchGuard](https://stormbold.github.io/StitchGuard/) — try the sample, copy the repair prompt, no install.
 
 > **Disclaimer:** StitchGuard is not affiliated with Google, OpenAI, Anthropic, Cursor, or any design-to-code platform.
+
+## Demo
+
+![StitchGuard visual diff preview](docs/assets/stitchguard-demo-preview.png)
+
+Open the [live demo](https://stormbold.github.io/StitchGuard/) → **Try Google Stitch → Codex sample** → Compare → copy `codex-fix-prompt.md`.  
+Animated GIF: tracked in [good first issues](docs/good-first-issues.md).
 
 ## Why StitchGuard?
 
@@ -25,7 +34,7 @@ Read [docs/why-stitchguard.md](docs/why-stitchguard.md) for the full positioning
 Pre-generated report: [examples/google-stitch-to-codex/report.md](examples/google-stitch-to-codex/report.md)  
 Repair prompt: [examples/google-stitch-to-codex/codex-fix-prompt.md](examples/google-stitch-to-codex/codex-fix-prompt.md)
 
-**3-step story:** Compare → Report → Prompt → Agent fix
+**Flow:** Target Design → AI Implementation → Visual Diff → Codex Fix Prompt
 
 ---
 
@@ -36,7 +45,9 @@ Repair prompt: [examples/google-stitch-to-codex/codex-fix-prompt.md](examples/go
 - Node.js 20+
 - [pnpm](https://pnpm.io/) 9+
 
-### 1. Clone and install
+### Install from source
+
+There is no npm package yet — clone and build:
 
 ```bash
 git clone https://github.com/Stormbold/StitchGuard.git
@@ -46,13 +57,7 @@ pnpm build
 pnpm generate-examples
 ```
 
-### 2. One-time browser setup (for `check --url`)
-
-```bash
-pnpm setup:browser
-```
-
-### 3. Try the demo
+Then run:
 
 ```bash
 pnpm stitchguard compare examples/screenshots/target.png examples/screenshots/actual.png
@@ -60,16 +65,19 @@ pnpm stitchguard compare examples/screenshots/target.png examples/screenshots/ac
 
 Open `.stitchguard/report.md` and `.stitchguard/codex-fix-prompt.md`.
 
-### 4. Web demo (browser-only)
+Planned: `npx stitchguard compare …` after npm publish — see [docs/npm-publishing.md](docs/npm-publishing.md).
+
+### Browser setup (for `check --url`)
+
+```bash
+pnpm setup:browser
+```
+
+### Web demo (no install)
 
 **Online:** [https://stormbold.github.io/StitchGuard/](https://stormbold.github.io/StitchGuard/)
 
-**Local:**
-```bash
-pnpm demo:web
-```
-
-Click **Try sample** — no server upload, runs client-side.
+**Local:** `pnpm demo:web`
 
 ---
 
@@ -110,13 +118,11 @@ pnpm stitchguard check \
 pnpm stitchguard init-agent
 ```
 
-Creates `.stitchguard/agent-rules.md` and prompt templates (opt-in `--write-agents-md` for root `AGENTS.md`).
-
 ---
 
 ## GitHub Actions
 
-External repos — no monorepo build:
+Requires tag [`v1`](https://github.com/Stormbold/StitchGuard/releases):
 
 ```yaml
 - uses: Stormbold/StitchGuard/action@v1
@@ -133,8 +139,6 @@ See [docs/github-actions.md](docs/github-actions.md).
 ---
 
 ## MCP Server
-
-Agents can capture, compare, and generate prompts in a loop:
 
 ```bash
 node packages/mcp-server/dist/index.js
@@ -164,6 +168,8 @@ pnpm generate-all
 - [Examples gallery](examples/README.md)
 - [GitHub Actions](docs/github-actions.md)
 - [MCP setup](docs/mcp-setup.md)
+- [npm publishing plan](docs/npm-publishing.md)
+- [GitHub About setup](docs/github-about.md)
 - [Roadmap](docs/roadmap.md)
 - [Good first issues](docs/good-first-issues.md)
 

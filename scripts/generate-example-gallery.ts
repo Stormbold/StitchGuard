@@ -71,6 +71,10 @@ async function main(): Promise<void> {
   await mkdir(webDemoSamples, { recursive: true });
   await writeFile(path.join(webDemoSamples, 'target.png'), flagship.target);
   await writeFile(path.join(webDemoSamples, 'actual.png'), flagship.actual);
+  await cp(
+    path.join('examples', 'google-stitch-to-codex', 'codex-fix-prompt.md'),
+    path.join(webDemoSamples, 'codex-fix-prompt.md'),
+  );
 
   console.log('Example gallery generated.');
 }

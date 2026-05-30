@@ -19,6 +19,8 @@ export default tseslint.config(
         Image: 'readonly',
         ImageData: 'readonly',
         createImageBitmap: 'readonly',
+        navigator: 'readonly',
+        setTimeout: 'readonly',
       },
     },
   },
